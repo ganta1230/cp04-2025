@@ -142,6 +142,26 @@
         var s = parseInt(rest-h*3600-m*60);
         clock(h,m,s,true);
 
+        const safeRest = Math.max(0, rest);
+        
+        const ratio = safeRest / period; 
+        
+        let red = 0;
+        let green = 0;
+        let blue = 0;
+        
+        if (ratio >= 0.5) {
+            red = parseInt(255 * (1 - ratio)); 
+            green = 255;
+            blue = parseInt(255 * ratio);
+        } else {
+            red = 255;
+            green = parseInt(255 * ratio * 2); 
+            blue = 0;
+        }
+
+        $('body').css('background-color', rgbToColor(red, green, blue));
+
     }
 
 
